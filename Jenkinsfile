@@ -7,6 +7,9 @@ pipeline {
         maven 'mvn'
         jdk 'jdk:11'
     }
+    environment {
+        scannerHome = tool 'sonar-scanner'
+    }
     stages {
         stage('SCM') {
             steps {
@@ -16,14 +19,12 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                // Define the Maven tool (assuming 'Default Maven' is a configured tool)
                 script {
-                    // Run SonarQube analysis with Maven
+                    // Run SonarQube analysis
                     withSonarQubeEnv('sonarserver') {
-                        sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=project-app -Dsonar.projectName='project-app'"
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectName=project-app -Dsonar.projectKey=project-app -Dsonar.java.binaries=src/main/java"
                     }
                 }
             }
         }
-    }
 }
