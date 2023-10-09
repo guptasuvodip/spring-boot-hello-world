@@ -5,7 +5,7 @@ pipeline {
     // }
     tools {
         maven 'mvn'
-        jdk 'jdk:11'
+        jdk 'jdk:17'
     }
     stages {
         stage('SCM') {
@@ -18,7 +18,6 @@ pipeline {
             steps {
                 // Define the Maven tool (assuming 'Default Maven' is a configured tool)
                 script {
-                    def mvn = tool 'Default Maven'
                     // Run SonarQube analysis with Maven
                     withSonarQubeEnv('sonarserver') {
                         sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=project-app -Dsonar.projectName='project-app'"
