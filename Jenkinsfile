@@ -1,6 +1,7 @@
 pipeline {
-    agent any {
+    agent any
     tools {
+        // Define the 'maven-class' tool and 'jdk:17' tool
         maven 'maven-class'
         jdk 'jdk:17'
     }
@@ -15,17 +16,14 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 // Define the Maven tool (assuming 'Default Maven' is a configured tool)
-                script{
-                    
+                script {
                     def mvn = tool 'Default Maven'
-
-                // Run SonarQube analysis with Maven
+                    // Run SonarQube analysis with Maven
                     withSonarQubeEnv('sonarserver') {
-                    sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=project-app -Dsonar.projectName='project-app'"
+                        sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=project-app -Dsonar.projectName='project-app'"
+                    }
                 }
             }
         }
     }
 }
-
-}    
