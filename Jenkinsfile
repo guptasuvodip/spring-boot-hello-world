@@ -1,11 +1,12 @@
-node {
-  stage('SCM') {
-    checkout scm
-  }
-  stage('SonarQube Analysis') {
-    def mvn = tool 'Default Maven';
-    withSonarQubeEnv() {
-      sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=project-app -Dsonar.projectName='project-app'"
-    }
-  }
-}
+pipeline{
+ 	node {
+  		stage('SCM') {
+    			checkout scm
+  		}
+  		stage('SonarQube Analysis') {
+    			def mvn = tool 'Default Maven';
+    			withSonarQubeEnv() {
+      				sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=project-app -Dsonar.projectName='project-app'"
+    			}
+  		}
+	}
