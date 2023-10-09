@@ -5,7 +5,7 @@ pipeline {
     // }
     tools {
         maven 'mvn'
-        jdk 'jdk:17'
+        jdk 'jdk:11'
     }
     stages {
         stage('SCM') {
