@@ -1,11 +1,12 @@
 pipeline {
     agent any
+    // agent {
+    //     label 'mv' # for agent need to add lebel of the node then it will work.
+    // }
     tools {
-        // Define the 'maven-class' tool and 'jdk:17' tool
-        maven 'maven-class'
+        maven 'mvn'
         jdk 'jdk:17'
     }
-
     stages {
         stage('SCM') {
             steps {
