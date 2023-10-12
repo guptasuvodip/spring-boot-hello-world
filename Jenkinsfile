@@ -3,27 +3,19 @@ pipeline {
     // agent {
     //     label 'mv' # for agent need to add lebel of the node then it will work.
     // }
-    tools {
-        maven 'mvn'
-        jdk 'jdk:11'
-    }
     environment {
-        scannerHome = tool 'sonar-scanner'
+        CI = true
+        ARTIFACTORY_ACCESS_TOKEN = credentials()
+        JFROG_PASSWORD = credentials()
     }
     stages {
-        stage('SCM') {
+        stage('Checkout Git repository') {
             steps {
                 // Checkout your source code from your version control system (e.g., Git)
-                checkout scm
+                git branch: 'artifact' , url : 'https://github.com/guptasuvodip/spring-boot-hello-world.git'
             }
         }
-        stage('SonarQube Analysis') {
-            steps {
-                script {
-                    // Run SonarQube analysis
-                    withSonarQubeEnv('sonarserver') {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectName=project-app -Dsonar.projectKey=project-app -Dsonar.java.binaries=src/main/java"
-                    }
+        
                 }
             }
         }
