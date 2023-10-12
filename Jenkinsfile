@@ -27,7 +27,7 @@ pipeline {
                         -e ARTIFACTORY_ACCESS_TOKEN=${accessToken} \\
                         -v ${WORKSPACE}:/workspace \\
                         ${dockerImage} \\
-                        jfrog rt upload --url http://192.168.1.230:8082/artifactory/ /workspace/target/demo-0.0.1-SNAPSHOT.jar java-web-app/
+                        jfrog rt upload --url http://192.168.1.230:8082/ /workspace/target/demo-1.0.2-SNAPSHOT.jar  artifactory/
                         """
             }
         }
