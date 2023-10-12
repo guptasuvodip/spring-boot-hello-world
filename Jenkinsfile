@@ -29,7 +29,7 @@ pipeline {
                         ${dockerImage} \\
                         jfrog rt upload --url http://192.168.1.230:8082/ /workspace/target/demo-1.0.2-SNAPSHOT.jar  artifactory/
                         """
-            }
+                }
         }
             
     }
